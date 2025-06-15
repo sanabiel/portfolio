@@ -361,7 +361,7 @@ export default function Home() {
                 >
                   <div className="aspect-[4/5] overflow-hidden rounded-xl bg-gradient-to-br from-orange-400 to-orange-600">
                     <img
-                      src="public/images/profile.jpg"
+                      src="/images/profile.jpg"
                       alt="Nabiel - Information Science Student"
                       className="h-full w-full object-cover object-top"
                     />
