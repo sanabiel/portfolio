@@ -1,14 +1,20 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion"
 import { ChevronLeft, ChevronRight, ExternalLink, Github, Eye, Calendar, Users, Star, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
+// Figma Icon Component
+const FigmaIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.02s-1.354-3.02-3.019-3.02h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.015-4.49-4.491S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148z"/>
+  </svg>
+)
+
 interface Project {
   id: string
   title: string
   description: string
-  longDescription: string
   image: string
   badges: string[]
   liveUrl?: string
@@ -25,7 +31,6 @@ interface ProjectGallery3DProps {
 
 export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isTransitioning, setIsTransitioning] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -36,17 +41,6 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
   const mouseY = useMotionValue(0)
   const rotateX = useSpring(useTransform(mouseY, [-300, 300], [15, -15]))
   const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-15, 15]))
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlaying) return
-    
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % projects.length)
-    }, 6000)
-
-    return () => clearInterval(interval)
-  }, [isAutoPlaying, projects.length])
 
   // Mouse move handler for 3D effects
   const handleMouseMove = (event: React.MouseEvent) => {
@@ -68,7 +62,6 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length)
-      setIsAutoPlaying(false)
       setIsTransitioning(false)
     }, 200)
   }
@@ -77,7 +70,6 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1))
-      setIsAutoPlaying(false)
       setIsTransitioning(false)
     }, 200)
   }
@@ -87,7 +79,6 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
     setIsTransitioning(true)
     setTimeout(() => {
       setCurrentIndex(index)
-      setIsAutoPlaying(false)
       setIsTransitioning(false)
     }, 200)
   }
@@ -95,10 +86,8 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full min-h-[80vh] overflow-hidden bg-gradient-to-br from-gray-50 via-orange-50 to-gray-100 rounded-3xl"
+      className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 via-orange-50 to-gray-100 rounded-3xl"
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
@@ -141,9 +130,9 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-[80vh] px-8">
+      <div className="relative z-10 flex md:items-center justify-center md:min-h-[80vh] px-4 py-16 sm:px-6 md:px-8 md:py-0">
         <motion.div 
-          className="grid lg:grid-cols-2 gap-12 max-w-7xl w-full items-center"
+          className="grid md:grid-cols-2 gap-16 w-full max-w-7xl items-center"
           animate={isTransitioning ? { rotateY: 10, scale: 0.95 } : { rotateY: 0, scale: 1 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
           style={{ transformStyle: "preserve-3d" }}
@@ -208,7 +197,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
                         transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
                       >
                         <Star className="h-4 w-4 inline mr-1" />
-                        Featured
+                        Scrum Master
                       </motion.div>
                     )}
                     
@@ -217,7 +206,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
                       <motion.img
                         src={currentProject.image}
                         alt={currentProject.title}
-                        className="w-full h-80 object-cover"
+                        className="w-full h-64 sm:h-80 object-cover"
                         initial={{ scale: 1.2 }}
                         animate={{ scale: 1 }}
                         transition={{ duration: 0.8 }}
@@ -241,8 +230,17 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
                                   className="bg-white text-orange-600 hover:bg-orange-50"
                                   onClick={() => window.open(currentProject.liveUrl, '_blank')}
                                 >
-                                  <ExternalLink className="h-4 w-4 mr-1" />
-                                  Live
+                                  {currentProject.liveUrl.includes('figma.com') ? (
+                                    <>
+                                      <FigmaIcon className="h-4 w-4 mr-1" />
+                                      Prototype
+                                    </>
+                                  ) : (
+                                    <>
+                                      <ExternalLink className="h-4 w-4 mr-1" />
+                                      Live
+                                    </>
+                                  )}
                                 </Button>
                               </motion.div>
                             )}
@@ -293,7 +291,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
                 animate={{ opacity: 1, y: 0, x: 0 }}
                 exit={{ opacity: 0, y: -30, x: -30 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="space-y-6"
+                className="space-y-4 md:space-y-5"
               >
                 {/* Category */}
                 <motion.div
@@ -308,7 +306,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
 
                 {/* Title */}
                 <motion.h2 
-                  className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 via-orange-600 to-orange-500 bg-clip-text text-transparent"
+                  className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 via-orange-600 to-orange-500 bg-clip-text text-transparent"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -337,7 +335,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
 
                 {/* Description */}
                 <motion.p 
-                  className="text-lg text-gray-700 leading-relaxed max-w-lg"
+                  className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-lg"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
@@ -376,7 +374,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
 
                 {/* Action Buttons */}
                 <motion.div 
-                  className="flex gap-4 pt-4"
+                  className="flex flex-wrap gap-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 }}
@@ -390,9 +388,19 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
                         className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-orange-500/25"
                         onClick={() => window.open(currentProject.liveUrl, '_blank')}
                       >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        View Live Site
-                        <ArrowRight className="h-4 w-4 ml-2" />
+                        {currentProject.liveUrl.includes('figma.com') ? (
+                          <>
+                            <FigmaIcon className="h-4 w-4 mr-2" />
+                            View Prototype
+                            <ArrowRight className="h-4 w-4 ml-2" />
+                          </>
+                        ) : (
+                          <>
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            View Live Site
+                            <ArrowRight className="h-4 w-4 ml-2" />
+                          </>
+                        )}
                       </Button>
                     </motion.div>
                   )}
@@ -420,11 +428,11 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
       </div>
 
       {/* Navigation Controls */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center gap-6">
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex items-center gap-4 sm:gap-6">
           {/* Previous Button */}
           <motion.button
-            className="bg-white/80 backdrop-blur-sm border border-gray-200 p-3 rounded-full hover:bg-white transition-all duration-300 shadow-lg"
+            className="bg-white/80 backdrop-blur-sm border border-gray-200 p-2 sm:p-3 rounded-full hover:bg-white transition-all duration-300 shadow-lg"
             onClick={prevProject}
             whileHover={{ scale: 1.1, backgroundColor: "rgba(249, 115, 22, 0.1)" }}
             whileTap={{ scale: 0.9 }}
@@ -451,7 +459,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
 
           {/* Next Button */}
           <motion.button
-            className="bg-white/80 backdrop-blur-sm border border-gray-200 p-3 rounded-full hover:bg-white transition-all duration-300 shadow-lg"
+            className="bg-white/80 backdrop-blur-sm border border-gray-200 p-2 sm:p-3 rounded-full hover:bg-white transition-all duration-300 shadow-lg"
             onClick={nextProject}
             whileHover={{ scale: 1.1, backgroundColor: "rgba(249, 115, 22, 0.1)" }}
             whileTap={{ scale: 0.9 }}
@@ -473,7 +481,7 @@ export function ProjectGallery3D({ projects }: ProjectGallery3DProps) {
 
       {/* Side Navigation Hints */}
       <motion.div 
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm hidden md:flex"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.5 }}
