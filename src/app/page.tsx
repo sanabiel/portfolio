@@ -93,7 +93,7 @@ const projects = [
   {
     id: "song-album-management",
     title: "Marmut - Song and Album Management System",
-    description: "A song and album management system that allows users to manage their song and album resources. Built with Vue.js and Django, it features real-time data streaming, customizable charts, collaborative sharing, and export capabilities.",
+    description: "A song and album management system that allows users to manage their song and album resources. Built with Python and Django, it features real-time data streaming, customizable charts, collaborative sharing, and export capabilities.",
     image: "/images/marmut.jpg",
     badges: ["Python", "Django", "Supabase", "SQL"],
     liveUrl: "https://marmut-basdat-e-5.vercel.app/login/",
@@ -106,7 +106,7 @@ const projects = [
   {
     id: "employee-data",
     title: "Employee Data Analytics",
-    description: "A data analytics system that allows users to manage their employee data. Built with Python and Django, it features real-time data streaming, customizable charts, collaborative sharing, and export capabilities.",
+    description: "A comprehensive data analytics project that analyzes employee data to identify patterns and trends, providing insights for better decision-making and performance management.",
     image: "/images/ewd.jpg",
     badges: ["Python", "Pandas", "Matplotlib", "Seaborn"],
     githubUrl: "https://drive.google.com/drive/folders/1Oo1g46mpL189dnLFtbaHlEjyCyO9hS9o?usp=sharing",
@@ -130,7 +130,7 @@ const projects = [
   {
     id: "btn-mobile-redesign",
     title: "Bale (BTN Mobile) Redesign",
-    description: "A redesign of the Bale (BTN Mobile) app to improve user experience and functionality. Built with React Native and TypeScript, it features a modern design, improved navigation, and new features.",
+    description: "A redesign of the Bale (BTN Mobile) app to improve user experience and functionality. Built with Figma, it features a modern design, improved navigation, and new features.",
     image: "/images/btn2.png",
     badges: ["Figma"],
     liveUrl: "https://www.figma.com/proto/9wdc4hvgqimaZHBCNvQhL8/Bale-BTN---new-code?node-id=30-4265&p=f&t=FyxCiozEfSHaXknO-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=30%3A4265&show-proto-sidebar=1",
