@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion"
-import { ChevronLeft, ChevronRight, ExternalLink, Github, Eye, Calendar, Users, Star, ArrowRight } from "lucide-react"
+import { motion, AnimatePresence, useTransform, useMotionValue, useSpring } from "framer-motion"
+import { ChevronLeft, ChevronRight, ExternalLink, Github, Calendar, Users, Star, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 

@@ -88,7 +88,7 @@ const projects = [
     date: "2025",
     team: "Team of 5",
     featured: true,
-    category: "Information Systems Development Project Class"
+    category: "Information Systems Development Project"
   },
   {
     id: "song-album-management",
@@ -101,19 +101,31 @@ const projects = [
     date: "2024",
     team: "Team of 4",
     featured: false,
-    category: "Database Class"
+    category: "Database"
   },
   {
-    id: "library-management-system",
-    title: "Library Management System",
-    description: "A library management system that allows users to manage their library's resources.",
-    image: "/images/library.jpg",
-    badges: ["Python", "Django"],
-    githubUrl: "https://github.com/example/ai-search",
-    date: "2023",
-    team: "Solo Project",
+    id: "employee-data",
+    title: "Employee Data Analytics",
+    description: "A data analytics system that allows users to manage their employee data. Built with Python and Django, it features real-time data streaming, customizable charts, collaborative sharing, and export capabilities.",
+    image: "/images/ewd.jpg",
+    badges: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+    githubUrl: "https://drive.google.com/drive/folders/1Oo1g46mpL189dnLFtbaHlEjyCyO9hS9o?usp=sharing",
+    date: "2025",
+    team: "Team of 4",
     featured: false,
-    category: "Internship"
+    category: "Data Analytics"
+  },
+  {
+    id: "easelder",
+    title: "EasElder",
+    description: "Prototype of a mobile application aimed at supporting caregivers and family members in managing the daily healthcare and emergency needs of elderly individuals",
+    image: "/images/easelder.jpg",
+    badges: ["Figma"],
+    liveUrl: "https://www.figma.com/proto/YvnBj2XFS2PkTLGrWC8SCx/EasElder?node-id=1502-21039&p=f&t=0wdnSCESW1M4toBB-1&scaling=min-zoom&content-scaling=fixed&page-id=1502%3A460&starting-point-node-id=1502%3A21039&show-proto-sidebar=1",
+    date: "2024",
+    team: "Team of 5",
+    featured: false,
+    category: "UI/UX Design"
   },
   {
     id: "btn-mobile-redesign",
@@ -137,21 +149,20 @@ const projects = [
     date: "2024",
     team: "Team of 3",
     featured: false,
-    category: "Customer Relationship Management Class"
+    category: "Customer Relationship Management"
   },
   {
-    id: "portfolio-website",
-    title: "Portfolio Website",
-    description: "A portfolio website that allows users to manage their portfolio's resources.",
-    image: "/images/portfolio.jpg",
-    badges: ["Next.js", "Tailwind CSS", "TypeScript", "Shadcn UI", "Vercel"],
-    liveUrl: "https://sanabiel.vercel.app/",
-    githubUrl: "https://github.com/sanabiel/portfolio",
-    date: "2025",
+    id: "library-management-system",
+    title: "Library Management System",
+    description: "A library management system that allows users to manage their library's resources.",
+    image: "/images/library.jpg",
+    badges: ["Python", "Django"],
+    githubUrl: "https://github.com/example/ai-search",
+    date: "2023",
     team: "Solo Project",
     featured: false,
-    category: "Web Development"
-  }
+    category: "Internship"
+  },
 ]
 
 export default function Home() {
@@ -167,7 +178,7 @@ export default function Home() {
 
   return (
     <motion.div 
-      className="relative min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50"
+      className="relative min-h-screen bg-white"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -194,7 +205,7 @@ export default function Home() {
             <span className="text-xl font-bold">Nabiel's Portfolio</span>
           </motion.div>
           <nav className="hidden md:flex items-center gap-6">
-            {["About", "Skills", "Projects", "Education", "Contact"].map((item, index) => (
+            {["About", "Skills", "Projects", "Experiences", "Contact"].map((item, index) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -312,8 +323,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
                 >
-                  Passionate about information systems, data analysis, and creating user-centered digital experiences.
-                </motion.p>
+                I'm an Information Systems student with a strong interest in Project Management, Data Analytics, and Web Development. I enjoy leading teams, building functional systems, and uncovering insights that drive better digital products.</motion.p>
                 <motion.div 
                   className="flex flex-wrap gap-4"
                   initial={{ opacity: 0, y: 30 }}
@@ -697,7 +707,7 @@ export default function Home() {
                 viewport={{ once: true }}
               />
               <p className="max-w-2xl text-gray-600">
-                Experience my projects in an immersive 3D gallery. Navigate through each project with smooth animations and discover the technologies and impact behind each creation.
+                Experience my projects in an immersive 3D gallery. Navigate through each project and discover the technologies and impact behind each creation.
               </p>
             </motion.div>
           </div>
@@ -724,7 +734,7 @@ export default function Home() {
               variants={itemVariants}
             >
               <Badge className="mb-4 bg-orange-100 text-orange-700 hover:bg-orange-200">My Background</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Education & Certifications</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Experiences</h2>
               <motion.div 
                 className="w-20 h-1 bg-orange-500 mb-6"
                 initial={{ width: 0 }}
@@ -733,7 +743,7 @@ export default function Home() {
                 viewport={{ once: true }}
               />
               <p className="max-w-2xl text-gray-600">
-                My academic journey and professional development in the field of information science.
+                My organization and working experiences in the field of information science and campus.
               </p>
             </motion.div>
 
@@ -756,21 +766,21 @@ export default function Home() {
                     year: "2025",
                     title: "Retail Funding - IT Support Internship",
                     institution: "PT. Bank Tabungan Negara Tbk",
-                    description: "Responsible for providing technical support to the Retail Funding department, including troubleshooting and maintaining the company's IT systems.",
+                    description: "During my internship, I redesigned the Bale Poin feature for the Bale mobile app and analyzed millions of loyalty transaction records using Python to identify user behavior patterns. I used Figma to implement a new UI/UX based on PRD and past iterations, and collaborated with internal teams and external vendors through weekly design reviews. I also created data visualizations to segment users by point activity, supporting more data-driven loyalty strategies.",
                     isLeft: true
                   },
                   {
                     year: "2024",
                     title: "Person in Charge of Seminar",
                     institution: "COMPFEST 16",
-                    description: "Responsible for organizing and managing the seminar program, including speaker selection, scheduling, and logistics.",
+                    description: "As the Person in Charge of Seminar at COMPFEST 16, I led a team of staff to organize and execute a series of seminars and workshops focused on IT-related fields such as UI/UX Design, Software Engineering, and Data Science. I was responsible for overseeing the entire process from curating relevant topics and selecting impactful speakers, to managing schedules, venue logistics, and on-the-day execution.",
                     isLeft: false
                   },
                   {
                     year: "2024",
                     title: "Head of Bureau at Human Resource",
                     institution: "BEM Fasilkom UI",
-                    description: "Responsible for managing the Human Resource Bureau, including recruitment, training, and development of staff.",
+                    description: "Responsible for managing the Human Resource Bureau at BEM Fasilkom UI 2025, focusing on the recruitment, training, and development of organizational members. Led initiatives to foster growth, engagement, and collaboration across the entire BEM, supporting member development throughout the year.",
                     isLeft: true
                   },
                   {
